@@ -3,6 +3,7 @@ package br.com.thonwelling.Dslist.services;
 import br.com.thonwelling.Dslist.dto.GameCompleteDto;
 import br.com.thonwelling.Dslist.dto.GameDto;
 import br.com.thonwelling.Dslist.models.Game;
+import br.com.thonwelling.Dslist.projections.GameMinProjection;
 import br.com.thonwelling.Dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,10 @@ public class GameService  {
   public GameCompleteDto findGameById(Long id) {
     Game result = gameRepository.findById(id).get();
     return new GameCompleteDto(result);
+  }
+  @Transactional(readOnly = true)
+  public List<GameDto> findGameByList(Long listId) {
+    List<GameMinProjection> result = gameRepository.searchByList(listId);
+    return result.stream().map(GameDto::new).collect(Collectors.toList());
   }
 }
