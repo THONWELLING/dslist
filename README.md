@@ -183,18 +183,18 @@ No geral, esse código define um método de consulta que retorna uma lista de ob
 List<GameMinProjection> searchByList(Long listId);
 ```
 
-[//]: # (### GameListRepository)
+### GameListRepository
 
-[//]: # ()
-[//]: # (```java)
 
-[//]: # (@Modifying)
+```java
 
-[//]: # (@Query&#40;nativeQuery = true, value = "UPDATE tb_belonging SET position = :newPosition WHERE list_id = :listId AND game_id = :gameId"&#41;)
+@Modifying
 
-[//]: # (void updateBelongingPosition&#40;Long listId, Long gameId, Integer newPosition&#41;;)
+@Query(nativeQuery = true, value = "UPDATE tb_belonging SET position = :newPosition WHERE list_id = :listId AND game_id = :gameId")
 
-[//]: # (```)
+void updateBelongingPosition(Long listId, Long gameId, Integer newPosition);
+
+```
 
 ### import.sql
 
